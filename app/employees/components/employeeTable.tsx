@@ -85,7 +85,8 @@ const EmployeeTable = ({ employees }: EmployeeTableProps) => {
         count: rows.length,
         getScrollElement: () => scrollRef.current,
         estimateSize: () => ROW_HEIGHT,
-        overscan: 25
+        measureElement: (el) => el.getBoundingClientRect().height,
+        overscan: 10
     });
 
     const virtualRows = rowVirtualizer.getVirtualItems();
@@ -147,6 +148,8 @@ const EmployeeTable = ({ employees }: EmployeeTableProps) => {
                         return (
                             <EmployeeRow
                                 key={row.id}
+                                ref={rowVirtualizer.measureElement}
+                                data-index={virtualRow.index}
                                 employee={row.original}
                             />
                         );
