@@ -1,69 +1,115 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { useMemo, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
+
+import EmployeeKPIs from '@/app/employees/components/employeeKPIs';
+import SearchInput from '@/app/dashboard/components/searchInput';
+import Pagination from '@/app/dashboard/components/pagination';
+import EmployeeFilters from '@/app/employees/components/employeeFilters';
+import EmployeeTable from '@/app/employees/components/employeeTable';
+import { Department, Status, Level, Employee } from '@/types/employee';
+
+import { getAllEmployees } from '@/api/employees';
+
+const HomeContent = () => {
+  const searchParams = useSearchParams();
+
+  const query = searchParams.get('q')?.toLowerCase();
+  const department = searchParams.get('department');
+  const status = searchParams.get('status');
+  const level = searchParams.get('level');
+
+  const page = Math.max(1, Number(searchParams.get('_page')) || 1);
+  const pageSize = Math.max(1, Number(searchParams.get('_per_page')) || 25);
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['employees'],
+    queryFn: () => getAllEmployees(),
+  });
+
+  const employees: Employee[] = useMemo(() => {
+    if (Array.isArray(data)) return data;
+    if (Array.isArray((data as { data?: unknown } | undefined)?.data)) {
+      return (data as unknown as { data: Employee[] }).data;
+    }
+    if (Array.isArray((data as { items?: unknown } | undefined)?.items)) {
+      return (data as unknown as { items: Employee[] }).items;
+    }
+    return [];
+  }, [data]);
+
+  const filteredEmployees = useMemo(() => {
+    return employees
+      .filter((e) => !query || e.name.toLowerCase().includes(query) || e.email.toLowerCase().includes(query) || e.title.toLowerCase().includes(query))
+      .filter((e) => !department || department === 'All' || e.department === department)
+      .filter((e) => !status || status === 'All' || e.status === status)
+      .filter((e) => !level || level === 'All' || e.level === level);
+  }, [employees, query, department, status, level]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredEmployees.length / pageSize));
+  const currentPage = Math.min(page, totalPages);
+
+  const pagedEmployees = useMemo(
+    () => filteredEmployees.slice((currentPage - 1) * pageSize, currentPage * pageSize),
+    [filteredEmployees, currentPage, pageSize]
+  );
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+    <div className="bg-[#FFF5E6] text-[#17324D]">
+      <header className="flex justify-between py-[10px]">
+        <h2></h2>
+      </header>
+
+      <div
+        className="flex w-full"
+      >
+        <aside
+          className="w-1/5"
+        >
+          &nbsp;
+        </aside>
+
+        <main
+          className="w-4/5 px-[15px]"
+        >
+          <section className="text-[0.5rem]">
+            {isLoading ? <p role="status">Loading employees...</p> : null}
+
+            {error ? <p role="alert">Unable to load employees</p> : null}
+
+            <h3 className="mb-[10px] font-bold text-[0.625rem]">Employee Overview</h3>
+            <EmployeeKPIs employees={filteredEmployees} />
+
+            <div className="flex place-items-center p-[10px] border-gray-300 border-[0.5px] mb-[10px] rounded-[3px] mt-[10px] bg-white">
+              <SearchInput query={query ?? ''} />
+              <EmployeeFilters
+                department={(department ?? '') as Department}
+                level={(level ?? '') as Level}
+                status={(status ?? '') as Status}
+                per_page={pageSize}
+              />
+            </div>
+
+            <EmployeeTable employees={pagedEmployees} />
+
+            <Pagination
+              totalItems={filteredEmployees.length}
+              page={currentPage}
+              pageSize={pageSize}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+          </section>
+        </main>
+      </div>
     </div>
   );
-}
+};
+
+const Home = () => (
+  <Suspense fallback={<p role="status">Loading dashboard...</p>}>
+    <HomeContent />
+  </Suspense>
+);
+
+export default Home;
