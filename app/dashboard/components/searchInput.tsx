@@ -48,7 +48,7 @@ const SearchInput = ({ query }: SearchInputProps) => {
                 placeholder="Search Employee..."
                 value={query}
                 onChange={handleQueryChange}
-                className="border-[0.5px] border-gray-300 rounded-[3px] p-[5px] text-[0.4375rem] bg-[#FFFAF2]"
+                className="border-[0.5px] border-gray-300 rounded-[3px] p-[5px] text-[0.4375rem] text-[] bg-[#FFFAF2]"
             />
         </div>
     );

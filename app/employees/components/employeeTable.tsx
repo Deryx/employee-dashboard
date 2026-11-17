@@ -1,3 +1,4 @@
+"use no memo";
 "use client";
 
 import React, { useRef } from 'react';
@@ -14,6 +15,7 @@ import {
 import { useVirtualizer } from '@tanstack/react-virtual';
 
 import EmployeeRow from './employeeRow';
+import EmployeeDetail from './employeeDetail';
 
 import { Employee } from '@/types/employee';
 
@@ -38,6 +40,9 @@ const features = tableFeatures({
 const columnHelper = createColumnHelper<typeof features, Employee>();
 
 const EmployeeTable = ({ employees }: EmployeeTableProps) => {
+    const [showDetail, setShowDetail] = React.useState(false);
+    const [selectedEmployee, setSelectedEmployee] = React.useState<Employee | null>(null);
+
     const scrollRef = useRef<HTMLDivElement>(null);
 
     const columns = React.useMemo(
@@ -98,6 +103,17 @@ const EmployeeTable = ({ employees }: EmployeeTableProps) => {
             ? totalSize - virtualRows[virtualRows.length - 1].end
             : 0;
 
+    const handleRowClick = (employee: Employee) => {
+        // Handle the row click event here
+        setSelectedEmployee(employee);
+        setShowDetail(true);
+    };
+
+    const handleCloseDetail = () => {
+        // Handle closing the employee detail view here
+        setShowDetail(false);
+        setSelectedEmployee(null);
+    };
 
     return (
         <div ref={scrollRef} className="h-[600px] overflow-auto">
@@ -151,6 +167,7 @@ const EmployeeTable = ({ employees }: EmployeeTableProps) => {
                                 ref={rowVirtualizer.measureElement}
                                 data-index={virtualRow.index}
                                 employee={row.original}
+                                onClick={() => handleRowClick(row.original)}
                             />
                         );
                     })}
@@ -162,6 +179,11 @@ const EmployeeTable = ({ employees }: EmployeeTableProps) => {
                     )}
                 </tbody>
             </table>
+            {
+                showDetail && selectedEmployee && (
+                    <EmployeeDetail employee={selectedEmployee} onButtonClick={handleCloseDetail} />
+                )
+            }
         </div>
     );
 
