@@ -5,12 +5,21 @@ type EmployeeRowProps = {
     ref?: React.Ref<HTMLTableRowElement>;
     'data-index'?: number;
     onClick: () => void;
+    isSelected?: boolean;
 };
 
-const EmployeeRow = ({ employee, ref, 'data-index': dataIndex, onClick }: EmployeeRowProps) => (
+const EmployeeRow = ({ 
+    employee, 
+    ref, 
+    'data-index': dataIndex, 
+    onClick, 
+    isSelected }: EmployeeRowProps) => (
     <tr ref={ref} 
         data-index={dataIndex}
-        className="border-[0.5px] hover:cursor-pointer border-gray-300 border-l-0 border-r-0 text-[0.375rem] text-gray-600 bg-white"
+        aria-selected={isSelected}
+        className={`border-[0.5px] hover:cursor-pointer hover:bg-gray-100 border-gray-300 border-l-0 border-r-0 text-[0.375rem] text-gray-600 ${
+            isSelected ? 'bg-gray-200' : 'bg-white'
+        }`}
         onClick={onClick}
     >
         <td className="px-1 py-1 text-center">{employee.id}</td>

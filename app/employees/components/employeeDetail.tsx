@@ -7,7 +7,7 @@ type EmployeeDetails = {
 
 const EmployeeDetails = ({ employee, onButtonClick }: EmployeeDetails) => {
     return (
-        <section className="fixed top-0 right-0 w-[200px] text-[0.4375rem] h-full bg-white shadow-lg p-2 z-50 border-l-[2px] border-[#FF7F01] overflow-y-auto">
+        <section className="h-full w-full text-[0.4375rem] bg-white p-2 border-l-[2px] border-[#FF7F01] overflow-y-auto">
             <h2
                 className="w-full flex justify-between items-center font-bold mb-2 pb-2"
             >
