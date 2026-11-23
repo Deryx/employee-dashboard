@@ -8,13 +8,13 @@ type EmployeeRowProps = {
     isSelected?: boolean;
 };
 
-const EmployeeRow = ({ 
-    employee, 
-    ref, 
-    'data-index': dataIndex, 
-    onClick, 
+const EmployeeRow = ({
+    employee,
+    ref,
+    'data-index': dataIndex,
+    onClick,
     isSelected }: EmployeeRowProps) => (
-    <tr ref={ref} 
+    <tr ref={ref}
         data-index={dataIndex}
         aria-selected={isSelected}
         className={`border-[0.5px] hover:cursor-pointer hover:bg-gray-100 border-gray-300 border-l-0 border-r-0 text-[0.375rem] text-gray-600 ${
