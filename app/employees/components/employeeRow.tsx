@@ -26,7 +26,7 @@ const EmployeeRow = ({
             <tr ref={ref}
                 data-index={dataIndex}
                 aria-selected={isSelected}
-                className={`border-[0.5px] h-12 hover:cursor-pointer hover:bg-[#F4EDE4] border-gray-500 border-l-0 border-r-0 text-[0.8rem] text-gray-500 ${
+                className={`border-[0.5px] h-16 hover:cursor-pointer hover:bg-[#F4EDE4] border-gray-200 border-l-0 border-r-0 text-[0.8rem] text-gray-500 ${
                     isSelected ? 'bg-[#F4EDE4]' : 'bg-white'
                 }`}
                 onClick={onClick}
