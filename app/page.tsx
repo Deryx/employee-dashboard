@@ -74,15 +74,15 @@ const HomeContent = () => {
         <main
           className="w-4/5 px-[15px]"
         >
-          <section className="text-[0.5rem]">
+          <section className="text-[0.8rem]">
             {isLoading ? <p role="status">Loading employees...</p> : null}
 
             {error ? <p role="alert">Unable to load employees</p> : null}
 
-            <h3 className="mb-[10px] font-bold text-[0.625rem]">Employee Overview</h3>
+            <h3 className="mb-[10px] font-bold text-[0.8rem]">Employee Overview</h3>
             <EmployeeKPIs employees={filteredEmployees} />
 
-            <div className="flex place-items-center p-[10px] border-gray-300 border-[0.5px] mb-[10px] rounded-[3px] mt-[10px] bg-white">
+            <div className="flex place-items-center p-[10px] border-gray-300 border-[0.5px] mb-[10px] rounded-[6px] mt-[10px] bg-white">
               <SearchInput query={query ?? ''} />
               <EmployeeFilters
                 department={(department ?? '') as Department}

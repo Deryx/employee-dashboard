@@ -67,7 +67,7 @@ const Pagination = ({ totalItems, pageSize = 25, page = 1 }: PaginationProps) =>
                 key={`page-${pageNumber}`}
                 name={String(pageNumber)}
                 aria-current={pageNumber === page ? 'page' : undefined}
-                className={`shrink-0 border-[none] py-1 px-1 text-[0.5rem] ${
+                className={`shrink-0 border-[none] py-1 px-1 text-[1rem] ${
                     pageNumber === page ? 'font-bold underline' : ''
                 }`}
                 onClick={handlePageNumberClick}
@@ -80,7 +80,7 @@ const Pagination = ({ totalItems, pageSize = 25, page = 1 }: PaginationProps) =>
     return (
         <nav aria-label="Pagination" className="flex items-center gap-2">
             <button
-                className="shrink-0 border-[none] py-1 px-1 text-[0.5rem]"
+                className="shrink-0 border-[none] py-1 px-1 text-[1rem]"
                 disabled={page <= 1}
                 onClick={handlePreviousClick}
             >
@@ -90,7 +90,7 @@ const Pagination = ({ totalItems, pageSize = 25, page = 1 }: PaginationProps) =>
             <button
                 type="button"
                 aria-label="Scroll page numbers left"
-                className="shrink-0 border-[none] py-1 px-1 text-[0.75rem]"
+                className="shrink-0 border-[none] py-1 px-1 text-[1rem]"
                 onClick={() => scrollPages(-1)}
             >
                 &lt;
@@ -107,21 +107,21 @@ const Pagination = ({ totalItems, pageSize = 25, page = 1 }: PaginationProps) =>
             <button
                 type="button"
                 aria-label="Scroll page numbers right"
-                className="shrink-0 border-[none] py-1 px-1 text-[0.75rem]"
+                className="shrink-0 border-[none] py-1 px-1 text-[1rem]"
                 onClick={() => scrollPages(1)}
             >
                 &gt;
             </button>
 
             <button
-                className="shrink-0 border-[none] py-1 px-1 text-[0.5rem]"
+                className="shrink-0 border-[none] py-1 px-1 text-[1rem]"
                 disabled={page >= totalPages}
                 onClick={handleNextClick}
             >
                 Next
             </button>
 
-            <label className="shrink-0 text-[0.5rem]">
+            <label className="shrink-0 text-[1rem]">
                 Per page{' '}
                 <select value={pageSize} onChange={handlePageSizeChange}>
                     {PAGE_SIZES.map((size) => (

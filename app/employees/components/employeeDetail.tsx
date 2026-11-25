@@ -7,7 +7,7 @@ type EmployeeDetails = {
 
 const EmployeeDetails = ({ employee, onButtonClick }: EmployeeDetails) => {
     return (
-        <section className="h-full w-full text-[0.4375rem] bg-white p-2 border-l-[2px] border-[#FF7F01] overflow-y-auto">
+        <section className="h-full w-full text-[1rem] bg-white p-2 border-l-[2px] border-[#FF7F01] overflow-y-auto">
             <h2
                 className="w-full flex justify-between items-center font-bold mb-2 pb-2"
             >
@@ -20,7 +20,7 @@ const EmployeeDetails = ({ employee, onButtonClick }: EmployeeDetails) => {
             </h2>
 
             <div
-                className="flex justify-between items-center mb-4 pb-2 bg-[#FF7F01] text-[#FFFAF2] rounded-[3px] p-2"
+                className="flex justify-between items-center mb-4 pb-2 bg-[#FF7F01] text-[#FFFAF2] rounded-[6px] p-2"
             >
                 <div>
                     <p>{employee.name}</p>
@@ -69,7 +69,7 @@ const EmployeeDetails = ({ employee, onButtonClick }: EmployeeDetails) => {
                                 employee.skills.map((skill) => (
                                     <button
                                         key={skill}
-                                        className="bg-[#FF7F01] mt-[-5px] text-white border hover:bg-gray-300 text-gray-800 font-bold py-1 px-2 rounded-[10px] text-[0.375rem]"
+                                        className="bg-[#FF7F01] mt-[-5px] text-white border hover:bg-gray-300 text-gray-800 font-bold py-1 px-2 rounded-[10px] text-[0.75rem]"
                                     >
                                         {skill}
                                     </button>

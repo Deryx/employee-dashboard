@@ -91,7 +91,7 @@ const EmployeeFilters = ({
                     id="department"
                     value={department}
                     onChange={handleDepartmentChange}
-                    className="p-[5px] border-[0.5px] border-gray-300 rounded-[3px] border-b-[none] text-[0.4375rem] bg-[#FFFAF2]"
+                    className="p-[5px] border-[0.5px] border-gray-300 rounded-[3px] border-b-[none] text-[0.8rem] bg-[#FFFAF2]"
                 >
                     <option key="All" value="All">All Departments</option>
                     <option key="Engineering" value="Engineering">Engineering</option>
@@ -112,7 +112,7 @@ const EmployeeFilters = ({
                     id="status"
                     value={status}
                     onChange={handleStatusChange}
-                    className="p-[5px] border-[0.5px] border-gray-300 rounded-[3px] text-[0.4375rem] bg-[#FFFAF2]"
+                    className="p-[5px] border-[0.5px] border-gray-300 rounded-[3px] text-[0.8rem] bg-[#FFFAF2]"
                 >
                     <option key="All" value="All">All Statuses</option>
                     <option key="Active" value="Active">Active</option>
@@ -126,7 +126,7 @@ const EmployeeFilters = ({
                     id="level"
                     value={level}
                     onChange={handleLevelChange}
-                    className="p-[5px] border-[0.5px] border-gray-300 rounded-[3px] text-[0.4375rem] bg-[#FFFAF2]"
+                    className="p-[5px] border-[0.5px] border-gray-300 rounded-[3px] text-[0.8rem] bg-[#FFFAF2]"
                 >
                     <option key="All" value="All">All Levels</option>
                     <option key="Entry" value="Entry">Entry</option>
@@ -141,7 +141,7 @@ const EmployeeFilters = ({
                     name="per_page"
                     value={per_page}
                     onChange={handlePageSizeChange}
-                    className="p-[5px] border-[0.5px] border-gray-300 rounded-[3px] text-[0.4375rem] bg-[#FFFAF2]"
+                    className="p-[5px] border-[0.5px] border-gray-300 rounded-[3px] text-[0.8rem] bg-[#FFFAF2]"
                 >
                     <option key="All" value="All">Select Per Page</option>
                     <option key="25" value="25">25</option>

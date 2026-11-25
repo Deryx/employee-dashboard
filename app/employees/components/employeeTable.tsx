@@ -113,7 +113,7 @@ const EmployeeTable = ({ employees }: EmployeeTableProps) => {
                 <table className="w-full">
                     <thead className="sticky top-0 z-10">
                         {table.getHeaderGroups().map((headerGroup) => (
-                            <tr key={headerGroup.id} className="h-6 bg-[#FF7F01] text-[#FFFAF2] text-[0.4375rem] border-[0.5px] rounded-t-[3px]">
+                            <tr key={headerGroup.id} className="h-6 bg-[#FF7F01] text-[#FFFAF2] text-[1rem] border-[0.5px] rounded-t-[3px]">
                                 {headerGroup.headers.map((header) => (
                                     <th key={header.id} className="">
                                         {header.isPlaceholder ? null : (
@@ -134,8 +134,8 @@ const EmployeeTable = ({ employees }: EmployeeTableProps) => {
                                             >
                                                 <table.FlexRender header={header} />
                                                 {{
-                                                    asc: '',
-                                                    desc: ''
+                                                    asc: ' ↑',
+                                                    desc: ' ↓',
                                                 }[header.column.getIsSorted() as string] ?? null}
                                             </div>
                                         )}
@@ -173,15 +173,12 @@ const EmployeeTable = ({ employees }: EmployeeTableProps) => {
                     </tbody>
                 </table>
 
-                {selectedEmployee && (
-                    <EmployeeDetail employee={selectedEmployee} onButtonClick={handleCloseDetail} />
-                )}
             </div>
 
             <aside
                 aria-hidden={!selectedEmployee}
                 inert={!selectedEmployee}
-                className={`fixed top-0 right-0 z-20 h-full w-[200px] max-w-full bg-white shadow-xl
+                className={`fixed top-0 right-0 z-20 h-full w-[400px] max-w-full bg-white shadow-xl
                     transition-transform duration-300 ease-out
                     ${selectedEmployee ? 'translate-x-0' : 'translate-x-full'}`}
             >

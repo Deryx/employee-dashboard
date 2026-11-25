@@ -6,15 +6,15 @@ type CardProps = {
 const Card = ({ title, info }: CardProps) => {
     return (
         <section
-            className=" border-gray-300 border-[0.5px] rounded-[3px] px-[8px] py-[5px] w-[80px] bg-white"
+            className=" border-gray-300 border-[0.5px] rounded-[10px] px-[8px] py-[5px] w-[160px] h-[100px] bg-white"
         >
             <h3
-                className="text-[0.4375rem] bg-white"
+                className="text-[1rem] bg-white"
             >
                 {title}
             </h3>
             <p
-                className="text-[0.75rem] font-bold"
+                className="text-[1rem] font-bold"
             >
                 {info}
             </p>
