@@ -33,7 +33,7 @@ const EmployeeKPIs = ({ employees }: EmployeeKPIProps) => {
         <>
             {employees && employees.length > 0 ?
                 (
-                    <div className="flex justify-between">
+                    <div className="flex justify-between px-12 mt-[-60px]">
                         <Card title="Employees" info={numberEmployees.toString()} />
                         <Card title="Active" info={activeEmployees.toString()} />
                         <Card title="Inactive" info={inactiveEmployees.toString()} />

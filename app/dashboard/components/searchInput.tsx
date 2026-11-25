@@ -40,7 +40,7 @@ const SearchInput = ({ query }: SearchInputProps) => {
     };
 
     return (
-        <div className="">
+        <div className="w-4/5">
             <input
                 type="text"
                 id="query"
@@ -48,7 +48,7 @@ const SearchInput = ({ query }: SearchInputProps) => {
                 placeholder="Search Employee..."
                 value={query}
                 onChange={handleQueryChange}
-                className="border-[0.5px] border-gray-300 rounded-[3px] p-[5px] text-[0.8rem] text-[] bg-[#FFFAF2]"
+                className="border-[0.5px] border-gray-300 rounded-[10px] p-3 w-full text-[0.8rem] text-[] bg-[#FFFFFF]"
             />
         </div>
     );

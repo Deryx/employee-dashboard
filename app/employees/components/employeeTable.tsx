@@ -64,7 +64,7 @@ const EmployeeTable = ({ employees }: EmployeeTableProps) => {
                 columnHelper.accessor('status', { header: 'Status', sortFn: 'text' }),
                 columnHelper.accessor('salary', { header: 'Salary', sortFn: 'alphanumeric' }),
                 columnHelper.accessor('performanceScore', {
-                    header: 'Performance Score',
+                    header: 'Performance',
                     sortFn: 'alphanumeric'
                 }),
                 columnHelper.accessor('hireDate', { header: 'Hire Date', sortFn: 'datetime' })
@@ -113,7 +113,9 @@ const EmployeeTable = ({ employees }: EmployeeTableProps) => {
                 <table className="w-full">
                     <thead className="sticky top-0 z-10">
                         {table.getHeaderGroups().map((headerGroup) => (
-                            <tr key={headerGroup.id} className="h-6 bg-[#FF7F01] text-[#FFFAF2] text-[1rem] border-[0.5px] rounded-t-[3px]">
+                            <tr key={headerGroup.id} 
+                                className="h-10 bg-[#F4EDE4] text-[#686F79] text-[0.85rem]"
+                            >
                                 {headerGroup.headers.map((header) => (
                                     <th key={header.id} className="">
                                         {header.isPlaceholder ? null : (
